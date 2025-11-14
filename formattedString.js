@@ -1,12 +1,9 @@
-//Create an array of users and display formatted information about each user.
+// takes a user object and returns a formatted string
 
 let user = {
   name: "Sarah Johnson",
   age: 25,
   city: "New York",
-  email: "sarah@gamil.com",
-  phone: 8798766566,
-  isStudent: true,
 };
-const formattedString = `Name: ${user.name}, Age: ${user.age}, Occupation: ${city.occupation}`;
+const formattedString = `Hai i am ${user.name} and i am ${user.age} years old. I am living in ${user.city} city.`;
 console.log(formattedString);
