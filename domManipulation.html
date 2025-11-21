@@ -1,0 +1,72 @@
+<html>
+  <head>
+    <title>DOM Manipulation</title>
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        padding: 40px;
+      }
+
+      .print-box {
+        border: 1px solid #000;
+        padding: 20px;
+        width: 300px;
+        font-size: 20px;
+      }
+
+      .changeStyleBtn {
+        border: 1px solid #000;
+        padding: 20px;
+        margin-top: 10px;
+        width: 200px;
+        font-size: 14px;
+      }
+
+      @media print {
+        body {
+          padding: 0;
+        }
+        .print-box {
+          border: none;
+          font-size: 24px;
+        }
+      }
+    </style>
+  </head>
+
+  <body>
+    <div class="print-box" id="messageBox">
+      Hello, this is my print message!
+    </div>
+
+    <!-- <button onclick="window.print()">Print</button> -->
+
+    <button id="changeTextBtn" class="changeStyleBtn">Change Message</button>
+
+    <script>
+      const messageBox = document.getElementById("messageBox");
+      const changeTextBtn = document.getElementById("changeTextBtn");
+
+      // Add event listener
+
+      changeTextBtn.addEventListener("click", function () {
+        messageBox.innerText = "The message has been changed using DOM!";
+
+        // Apply new styles only on click
+        messageBox.style.cssText =
+          "color: red; background-color: yellow; font-size: 20px;";
+
+        const newParagraph = document.createElement("p");
+        newParagraph.textContent = "I will kill you!";
+        document.body.appendChild(newParagraph); //add into the page
+
+        //add image after click
+        const newImage = document.createElement("img");
+        newImage.src = "images.png";
+        newImage.alt = "A beautiful image";
+        newImage.className = "my-image";
+        document.body.appendChild(newImage);
+      });
+    </script>
+  </body>
+</html>
