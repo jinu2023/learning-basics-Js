@@ -41,6 +41,10 @@
         background-color: #f44336;
         color: white;
       }
+      .reset {
+        background-color: #ceb516;
+        color: white;
+      }
       button:hover {
         opacity: 0.8;
       }
@@ -52,6 +56,7 @@
       <div class="counter-display" id="counter">0</div>
       <button class="increment" id="incrementBtn">+</button>
       <button class="decrement" id="decrementBtn">-</button>
+      <button class="reset" id="resetBtn">Reset</button>
     </div>
     <script>
       // Wait for the page to load
@@ -60,9 +65,12 @@
         let counterDisplay = document.getElementById("counter");
         let incrementBtn = document.getElementById("incrementBtn");
         let decrementBtn = document.getElementById("decrementBtn");
+        let resetBtn = document.getElementById("resetBtn");
 
         // Initialize counter
         let count = 0;
+        let minLimit = -10;
+        let maxLimit = 10;
 
         // Function to update the display
         function updateDisplay() {
@@ -71,22 +79,65 @@
 
         // Increment button event listener
         incrementBtn.addEventListener("click", function () {
-          count++;
-          updateDisplay();
-          console.log("Counter increased to:", count);
+          if (count < maxLimit) {
+            count++;
+            updateDisplay();
+            console.log("Counter increased to:", count);
+          } else {
+            alert("Reached MAX limit:", maxLimit);
+          }
         });
 
         // Decrement button event listener
         decrementBtn.addEventListener("click", function () {
-          count--;
-          updateDisplay();
-          console.log("Counter decreased to:", count);
+          if (count > minLimit) {
+            count--;
+            updateDisplay();
+            console.log("Counter decreased to:", count);
+          } else {
+            alert("Reached MIN limit:", minLimit);
+          }
         });
 
-        // Initialize the display
+        //Reset button
+
+        resetBtn.addEventListener("click", function () {
+          count = 0;
+          updateDisplay();
+          console.log("Counter Reset to:", count);
+        });
+
+        //keyboard arrow
+        document.addEventListener("keydown", function (event) {
+          if (event.key === "ArrowUp" && count < maxLimit) {
+            count++;
+            updateDisplay();
+            console.log("Counter increased (keyboard) to:", count);
+          } else if (event.key === "ArrowDown" && count > minLimit) {
+            count--;
+            updateDisplay();
+            console.log("Counter decreased (keyboard) to:", count);
+          } else if (event.key === "r" || event.key === "R") {
+            count = 0;
+            updateDisplay();
+            console.log("Counter reset (keyboard) to:", count);
+          }
+        });
+
+        function updateDisplay() {
+          counterDisplay.textContent = count;
+
+          if (count > 0) {
+            counterDisplay.style.color = "green";
+          } else if (count < 0) {
+            counterDisplay.style.color = "red";
+          } else {
+            counterDisplay.style.color = "black";
+          }
+        }
+
         updateDisplay();
       });
     </script>
-    <!-- <script src="script.js"></script> -->
   </body>
 </html>
